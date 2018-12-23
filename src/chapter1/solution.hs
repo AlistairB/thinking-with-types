@@ -35,3 +35,15 @@ prod14ii f = (fst . f, snd . f)
 
 sum14ii :: (c -> a) -> (c -> b) -> c -> (a, b)
 sum14ii fca fcb = \c -> (fca c, fcb c)
+
+{-
+Exercise 1.4-iii
+Give a proof of (a^b)^c = a^(b×c) . Does it remind you of
+anything from Prelude?
+-}
+
+allExpon14iii :: (c -> b -> a) -> (b, c) -> a
+allExpon14iii fcba = \(b, c) -> fcba c b
+
+prodExpon14iii :: ((b, c) -> a) -> (c -> b -> a)
+prodExpon14iii f = \c b -> f (b, c)
