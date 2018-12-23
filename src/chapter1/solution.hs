@@ -45,5 +45,5 @@ anything from Prelude?
 allExpon14iii :: (c -> b -> a) -> (b, c) -> a
 allExpon14iii fcba = \(b, c) -> fcba c b
 
-prodExpon14iii :: ((b, c) -> a) -> (c -> b -> a)
+prodExpon14iii :: ((b, c) -> a) -> c -> b -> a
 prodExpon14iii f = \c b -> f (b, c)
