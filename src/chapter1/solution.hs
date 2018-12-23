@@ -12,7 +12,7 @@ Left Bool = 2
 {-
 1.4-i
 Q: Use Curry–Howard to prove the exponent law that
-a b × a c = a b+c . That is, provide a function of the type
+a^b × a^c = a ^ b+c . That is, provide a function of the type
 (b -> a) -> (c -> a) -> Either b c -> a and one of
 (Either b c -> a) -> (b -> a, c -> a).
 -}
@@ -23,3 +23,15 @@ productExample _ fca (Right c) = fca c
 
 sumExample :: (Either b c -> a) -> (b -> a, c -> a)
 sumExample f = (f . Left, f . Right)
+
+
+{-
+Exercise 1.4-ii
+Prove (a × b)^c = a^c × b^c .
+-}
+
+prod14ii :: (c -> (a, b)) -> (c -> a, c -> b)
+prod14ii f = (fst . f, snd . f)
+
+sum14ii :: (c -> a) -> (c -> b) -> c -> (a, b)
+sum14ii fca fcb = \c -> (fca c, fcb c)
