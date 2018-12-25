@@ -1,3 +1,6 @@
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeFamilies #-}
+module ChapterTwo.Solution where
 {-
 Exercise 2.1.3-i
 If Show Int has kind CONSTRAINT what’s the kind of Show?
@@ -32,11 +35,24 @@ hmmm why
 class MonadTrans t where
   lift :: Monad m => m a -> t m a
 
-From `lift :: Monad m => m a -> t m a` can say `t` must have a Monad inside it. The kind of Monad is (TYPE -> TYPE) -> CONSTRAINT
+From `lift :: Monad m => m a -> t m a` can say `t` embeds a `m` which is a Monad which is (TYPE -> TYPE)
 
-Therefore we start with (TYPE -> TYPE) -> ? . However, in this case we need a TYPE not a CONSTRAINT, therefore we take the `a` type as well.
+Therefore we start with (TYPE -> TYPE) -> ? . However, we also need an `a` type as well.
      Monad        A   produces a concrete type and we get a constraint
 ((TYPE → TYPE) → TYPE → TYPE) -> CONSTRAINT
 
 `MaybeT (m :: * -> *) a` works as `(MonadTrans MaybeT) :: Constraint`
 -}
+
+{-
+Exercise 2.4-i
+Write a closed type family to compute Not.
+-}
+
+type family Or (x :: Bool) (y :: Bool) :: Bool where
+  Or 'True y = 'True
+  Or 'False y = y
+
+type family Not (x :: Bool) :: Bool where
+  Or 'True = 'False
+  Or 'False = 'True

@@ -1,3 +1,4 @@
+module ChapterOne.Solution where
 {-
 1.2-i
 Q: Determine the cardinality of Either Bool (Bool, Maybe Bool) -> Bool.
